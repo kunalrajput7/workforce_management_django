@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <style>
+      .form-control {
+        color: white;
+      }
+      .white-text {
+        color: white;
+      }
+      .black-text {
+        color: black;
+      }
+      body {
+        margin-top: 0;
+      }
+      .banner {
+        margin-top: 0;
+        padding-top: 0;
+        width: 100%;
+        height: 100vh;
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.75),
+            rgba(0, 0, 0, 0.75)
+          ),
+          url("https://png.pngtree.com/thumb_back/fh260/background/20201009/pngtree-dark-green-cyan-paper-cut-minimalist-background-for-brochure-poster-banner-image_405384.jpg");
+        background-size: cover;
+        background-position: center;
+      }
+      .divider:after,
+      .divider:before {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: #eee;
+      }
+      .h-custom {
+        height: calc(100% - 73px);
+      }
+      @media (max-width: 450px) {
+        .h-custom {
+          height: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <form
+      method="post"
+      action="/login/"
+      enctype="multipart/form-data"
+      style="margin-top: 0"
+    >
+      {% csrf_token %}
+      <div class="banner">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-md-9 col-lg-6 col-xl-5">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Persistent_Logo.png"
+              class="img-fluid"
+              alt="Sample image"
+            />
+          </div>
+          <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+            <form>
+              <div
+                class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start"
+              ></div>
+
+              <!--<div class="divider d-flex align-items-center my-4">
+                <p class="text-center fw-bold mx-3 mb-0">Or</p> 
+              </div>-->
+
+              <!-- Email input -->
+              <div class="form-outline mb-4 white-text">
+                <input
+                  type="text"
+                  name="username"
+                  id="form3Example3"
+                  class="form-control form-control-lg white-text"
+                  placeholder="Enter Emp Code"
+                />
+                <label class="form-label" for="form3Example3">Username</label>
+              </div>
+
+              <!-- Password input -->
+              <div class="form-outline mb-3 white-text">
+                <input
+                  type="password"
+                  name="password"
+                  id="form3Example4"
+                  class="form-control form-control-lg black-text"
+                  placeholder="Enter password"
+                />
+                <label class="form-label" for="form3Example4">Password</label>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center">
+                <!-- Checkbox -->
+                <!--                <div class="form-check mb-0">-->
+                <!--                  <input-->
+                <!--                    class="form-check-input me-2"-->
+                <!--                    type="checkbox"-->
+                <!--                    value=""-->
+                <!--                    id="form2Example3"-->
+                <!--                  />-->
+                <!--                  <label class="form-check-label" for="form2Example3">-->
+                <!--                    Remember me-->
+                <!--                  </label>-->
+                <!--                </div>-->
+                <!--                <a href="#!" class="text-body">Forgot password?</a>-->
+              </div>
+
+              <div class="text-center text-lg-start mt-4 pt-2">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-lg"
+                  style="
+                    padding-left: 2.5rem;
+                    padding-right: 2.5rem;
+                    background-color: green;
+                    color: white;
+                  "
+                >
+                  Login
+                </button>
+                <p class="small fw-bold mt-2 pt-1 mb-0">
+                  <!--Don't have an account?
+                  <a href="/register/" class="link-danger">Register</a>-->
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div
+        class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary"
+      >
+        <!-- Copyright -->
+        <div class="text-white mb-3 mb-md-0"></div>
+        <!-- Copyright -->
+
+        <!-- Right -->
+        <div>
+          <a href="#!" class="text-white me-4">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#!" class="text-white me-4">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#!" class="text-white me-4">
+            <i class="fab fa-google"></i>
+          </a>
+          <a href="#!" class="text-white">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+        </div>
+        <!-- Right -->
+      </div>
+    </form>
+  </body>
+</html>

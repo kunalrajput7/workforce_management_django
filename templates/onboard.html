@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onboarding</title>
+</head>
+<body>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <h1>This is Onboarding Page</h1>
+    <p>You may choose to onboard employees one by one or do a excel based bulk upload</p>
+
+    <form action = "{% url 'onboard' %}" method="post">
+        {%csrf_token%}
+        {{form.as_p}}
+        Date format : mm/dd/yyyy
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <br>
+    <h1>Or you can choose to Bulk upload</h1>
+    <a href="{% url 'bulk_upload' %}">BULK UPLOAD</a>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<h1>This is the bulk upload page</h1>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <input type="file" name="ExcelData">
+  <button type="submit">Upload</button>
+  <h1>Please upload the xlsx File</h1>
+</form>

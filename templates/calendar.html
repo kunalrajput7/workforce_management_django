@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    <script>
+        const monthnames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+        window.onload = function(){
+
+            const d = new Date()
+            date = d.getDate()
+            document.getElementById(date).parentElement.style.backgroundColor = '#aff8d8'
+
+            let mn = Number("{{month}}")-1
+            var monthName = monthnames[mn]
+            
+            $('#form').submit(function(e){
+                $.post(`../${mn+1}/`, $(this).serialize());
+                alert("Attendance Updated !");
+                e.preventDefault();
+            });
+
+            document.getElementById('monthname').innerHTML = monthName;
+
+            const abbs = ["Leave", "Working", "HalfDay", "Holiday"]
+            let lst = {{lst|safe}} //Ignore if error marked, its Django templating syntax
+            console.log(lst);
+
+            console.log(typeof(lst));
+            
+            for(let i=0; i<lst.length; i++){
+                document.getElementById(i+1).selectedIndex = abbs.indexOf(lst[i])
+            }
+        };
+        Url = "../"
+        function prev(){
+            const prevmonth = Number("{{month}}")-1;
+            window.location.href = Url+prevmonth
+        }
+        function next(){
+            const nextmonth = Number("{{month}}")+1;
+            window.location.href = Url+nextmonth
+        }
+
+    </script>
+    <style>
+        .Calendar {
+            width: 80%;
+            margin: auto;
+        }
+        th {
+            width: 200px;
+        }
+        tr {
+            height: 70px;
+        }
+        table {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div style="display: flex; justify-content: space-between;"><p>Welcome {{user}}</p>
+        <a href="/logout/">Logout</a></div>
+    <div class="Calendar">
+        <div style="display: flex; justify-content: space-between;"><button class="prev" onclick="prev()"> ← </button><span id="monthname"></span><button class="next" onclick="next()"> → </button></div>
+
+        <form method="post" id="form">
+            {% csrf_token %}
+        <table>
+            <colgroup>
+                <col span="5" style="background-color:white">
+                <col span="2" style="background-color:#c4faf8">
+              </colgroup>
+            <tr>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+                <th>Saturday</th>
+                <th>Sunday</th>
+            </tr>
+            {% for rows in cal %}
+            <tr>
+                {% for day in rows %}
+                <td>
+                    {% if day != 0 %}
+                    {{day}} <br>
+                    <!-- <label for="{{day}}">Status:</label> -->
+                    <select name="{{day}}" id="{{day}}">
+                        <option value="Leave">L</option>
+                        <option value="Working">W</option>
+                        <option value="HalfDay">HD</option>
+                        <option value="Holiday">H</option>
+                    </select>
+                    {% endif %}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+        <div style="text-align: end"><input type="submit" value="Submit"></div>
+        </form>
+        <br>
+    </div>
+    
+</body>
+</html>

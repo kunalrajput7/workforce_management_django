@@ -1,0 +1,133 @@
+{% if user.is_authenticated and role == 'user'%}
+<head>
+  <meta charset="UTF-8" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+    }
+    .banner {
+      width: 100%;
+      height: 100vh;
+      background-image: linear-gradient(
+          rgba(0, 0, 0, 0.75),
+          rgba(0, 0, 0, 0.75)
+        ),
+        url("https://png.pngtree.com/thumb_back/fh260/background/20201009/pngtree-dark-green-cyan-paper-cut-minimalist-background-for-brochure-poster-banner-image_405384.jpg");
+      background-size: cover;
+      background-position: center;
+    }
+    .navbar {
+      width: 100%;
+      margin: auto;
+      padding: 35px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .navbar ul {
+      display: flex;
+      list-style: none;
+      margin-right: 30px;
+    }
+
+    .navbar ul li {
+      margin: 0px 20px;
+    }
+    .navbar ul li a {
+      text-decoration: none;
+      padding: 5px 10px;
+      color: whitesmoke;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .navbar ul li a:hover {
+      background-color: grey;
+      color: black;
+    }
+    .btn {
+      background-color: #4caf50;
+      border: 1px solid green;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 16px;
+      cursor: pointer;
+      width: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 600px) {
+      .btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  </style>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+    integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</head>
+
+<body>
+  <div class="banner">
+    <div class="navbar">
+      <div></div>
+      <div>
+        <ul>
+          <li><a href="/logout/">Logout</a></li>
+          {% if reset == False %}
+          <li><a href="/reset_password/">Reset Password</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+    <h2 style="color: white; text-align: center">
+      Welcome - User Home <i class="fa fa-user"></i>
+    </h2>
+    <button class="btn">Mark Attendance</button>
+  </div>
+  <script>
+    const d = new Date();
+    month = d.getMonth() + 1;
+    year = d.getFullYear();
+    Url = `../TimeEntry/${year}/${month}`;
+
+    $(".btn").click(function () {
+      // $.ajax({
+      //   url : url,
+      //   type : "GET",
+      //   success : function(result){
+      //     console.log(result);
+      //   },
+      //   error : function(result){
+      //     console.log(`Error ${result}`);
+      //   }
+      // })
+      // $.get(Url, function(data, status){
+      //   console.log(`${data}`);
+      // })
+      window.location.href = Url;
+    });
+  </script>
+</body>
+
+{%else %} either you are not admin or not authenticated {% endif %}
